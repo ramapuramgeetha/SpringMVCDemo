@@ -7,7 +7,6 @@ import java.util.List;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import resources.DAOClass;
@@ -15,6 +14,7 @@ import resources.IDAOInterface;
 import resources.Product;
 
 @Controller
+
 public class mainController {
 @RequestMapping("/")
 	public String ShowProducts(){
@@ -23,7 +23,7 @@ public class mainController {
 	
 @RequestMapping (value="/Products", method=RequestMethod.GET)
 	public ModelAndView mainController(){
-	DAOClass dataList = new DAOClass();
+	IDAOInterface dataList = new DAOClass();
 	ModelAndView Disp = new ModelAndView("Products");
 	
 	List <Product> Prods =new ArrayList<Product> (); 
