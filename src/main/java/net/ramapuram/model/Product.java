@@ -1,10 +1,23 @@
-package resources;
+package net.ramapuram.model;
 
+import javax.persistence.*;
+
+@Entity
+@Table(name = "PRODUCT")
 public class Product {
-String prodID;
-String prodName;
-String prodCategory;
-Double prodPrice;
+	@Id
+   @Column(name = "prodID")
+ String prodID;
+
+   @Column(name = "prodCategory")
+    String prodCategory;
+
+   @Column(name = "prodName")
+    String prodName;
+
+   @Column(name = "prodPrice")
+    Double prodPrice;
+   
 
 	public String getProdID() {
 	return prodID;

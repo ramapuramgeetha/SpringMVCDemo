@@ -9,9 +9,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import net.ramapuram.model.Product;
 import resources.DAOClass;
 import resources.IDAOInterface;
-import resources.Product;
 
 @Controller
 
@@ -36,6 +36,7 @@ public class mainController {
 	}
 	
 	Disp.addObject("data",Prods);
+	
 	return (Disp);
 	
 		

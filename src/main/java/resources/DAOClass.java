@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import net.ramapuram.model.Product;
+
 public class DAOClass implements IDAOInterface {
 
 	public DAOClass() {
@@ -21,11 +23,10 @@ public class DAOClass implements IDAOInterface {
 		Prods.add(p3);
 		Prods.add(p4);
 		
-	
-		Iterator <Product> it = Prods.iterator();
+			Iterator <Product> it = Prods.iterator();
 		while (it.hasNext()) {
 			Product o = it.next();
-			System.out.println( o.prodID  + "  " + o.prodCategory + "  " + o.prodName + "  " + o.prodPrice );
+			System.out.println( o.getProdID()  + "  " + o.getProdCategory() + "  " + o.getProdName() + "  " + o.getProdPrice() );
 		}
 		
 		return Prods;
