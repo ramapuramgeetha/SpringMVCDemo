@@ -3,19 +3,18 @@ package net.ramapuram.model;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "PRODUCT")
 public class Product {
+
 	@Id
-   @Column(name = "prodID")
  String prodID;
 
-   @Column(name = "prodCategory")
+
     String prodCategory;
 
-   @Column(name = "prodName")
+
     String prodName;
 
-   @Column(name = "prodPrice")
+
     Double prodPrice;
    
 
