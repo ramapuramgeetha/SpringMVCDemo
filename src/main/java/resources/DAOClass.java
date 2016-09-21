@@ -4,33 +4,86 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import org.hibernate.Query;
+import org.hibernate.SessionFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
+
 import net.ramapuram.model.Product;
 
+@Repository ("IDAOInterface")
 public class DAOClass implements IDAOInterface {
 
-	public DAOClass() {
+	@Autowired
+	private Product Product;
+	
+	@Autowired
+	private SessionFactory sessionFactory;
+	
+	
+	public DAOClass(SessionFactory sessionFactory) {
+		this.sessionFactory =sessionFactory;
 		// TODO Auto-generated constructor stub
 	}
 
-	public List<Product> getProducts() {
-		List <Product> Prods= new ArrayList<Product>();
-		Product p1 = new Product("G1", "Guitar", "Givson", 3000.00 );
-		Product p2 = new Product("K1", "Keyboard", "Yamaha", 23000.00 );
-		Product p3 = new Product("K2", "Keyboard", "Yamaha 4300", 25000.00 );
-		Product p4 = new Product("D1", "Drums", "Custom", 10000.00 );
-		Prods.add(p1);
-		Prods.add(p2);
-		Prods.add(p3);
-		Prods.add(p4);
+	@Override
+	public boolean create(Product product) {
+		try {
+			sessionFactory.getCurrentSession().save(product);
+		}
+		catch (Exception e)
+		{
+			e.printStackTrace();
+			return false;
+		}
+		return true;
+	}
+
+	@Override
+	public boolean update(Product product) {
+		try {
+			sessionFactory.getCurrentSession().update(product);
+		}
+		catch (Exception e)
+		{
+			e.printStackTrace();
+			return false;
+		}
+		return true;
+	}
+
+	@Override
+	public boolean delete(String productId) {
+		try {
+			sessionFactory.getCurrentSession().delete(retrieve(productId));
+		}
+		catch (Exception e)
+		{
+			e.printStackTrace();
+			return false;
+		}
+		return true;
+	}
+
+	@Override
+	public Product retrieve(String productId) {
+		//SELECT * FROM PRODUCT WHERE PRODID = 'PRODID';
+		String hql ="Select * from Product where prodID ='"+productId +"'";
+		Query qry = sessionFactory.getCurrentSession().createQuery(hql);
+		List <Product> list =qry.list();
 		
-			Iterator <Product> it = Prods.iterator();
-		while (it.hasNext()) {
-			Product o = it.next();
-			System.out.println( o.getProdID()  + "  " + o.getProdCategory() + "  " + o.getProdName() + "  " + o.getProdPrice() );
+		if (list == null || list.isEmpty())
+		{
+			return null;
 		}
 		
-		return Prods;
-		
+		return list.get(0);
+	}
+
+	@Override
+	public List<Product> retrieveall() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

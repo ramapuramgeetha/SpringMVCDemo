@@ -20,26 +20,39 @@ public class mainController {
 	public String ShowProducts(){
 		return ("index");
 	}
-	
+
+
 @RequestMapping (value="/Products", method=RequestMethod.GET)
-	public ModelAndView mainController(){
-	IDAOInterface dataList = new DAOClass();
-	ModelAndView Disp = new ModelAndView("Products");
-	
-	List <Product> Prods =new ArrayList<Product> (); 
-			Prods =dataList.getProducts();
-	
-	Iterator <Product> it = Prods.iterator();
-	while (it.hasNext()) {
-		Product o = it.next();
-		System.out.println( o.getProdID()  + "  " + o.getProdCategory() + "  " + o.getProdName() + "  " + o.getProdPrice() );
-	}
-	
-	Disp.addObject("data",Prods);
-	
-	return (Disp);
-	
+public ModelAndView mainController(){
+IDAOInterface dataList =null;
+ModelAndView Disp = new ModelAndView("Products");
+Product prod =dataList.retrieve("PR1");
+Disp.addObject("data",prod);
+return (Disp);
+}
+@RequestMapping (value="/Save", method=RequestMethod.GET)
+public ModelAndView save(){
+
+	IDAOInterface data = new DAOClass();
+
+ Product product1= new Product("PR1", "Guitar", "MyGuitar",3500.00);
+ Product product2= new Product("PR2", "Guitar", "MyGuitar",3500.00);
+ Product product3= new Product("PR3", "Guitar", "MyGuitar",3500.00);
+}
+/*
+List <Product> Prods =new ArrayList<Product> (); 
 		
-	}
+
+Iterator <Product> it = Prods.iterator();
+while (it.hasNext()) {
+	Product o = it.next();
+	System.out.println( o.getProdID()  + "  " + o.getProdCategory() + "  " + o.getProdName() + "  " + o.getProdPrice() );
+}
+
+Disp.addObject("data",Prods);
+
+return (Disp);*/
 
 }
+	
+
