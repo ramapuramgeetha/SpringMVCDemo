@@ -5,7 +5,7 @@ import javax.persistence.*;
 @Entity
 public class Product {
 
-	@Id
+	@Id 
  String prodID;
 
 

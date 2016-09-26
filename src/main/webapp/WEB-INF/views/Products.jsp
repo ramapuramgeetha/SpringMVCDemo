@@ -20,7 +20,8 @@
 		<td> Product Name </td>
 		<td>Price </td>
 	</tr>
-	<c:if ${data} ! = null>
+	
+	<c:if test ="${data != null}">
 	<c:forEach items="${data}" var="prod">
 	<tr>
 			<td> ${prod.prodID}</td>
@@ -30,8 +31,7 @@
 		</tr>
 		</c:forEach>
 	</c:if>
-	<c:if ${data}  = null>
-	
+	<c:if test ="${data = null}">
 	<tr>
 			<td> There are no products with this number</td>
 	</tr>

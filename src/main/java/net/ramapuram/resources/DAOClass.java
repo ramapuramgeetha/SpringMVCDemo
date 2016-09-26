@@ -1,4 +1,4 @@
-package resources;
+package net.ramapuram.resources;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -8,12 +8,17 @@ import org.hibernate.Query;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import net.ramapuram.model.Product;
 
-@Repository ("IDAOInterface")
+@Repository 
+@Transactional
 public class DAOClass implements IDAOInterface {
 
+	public  DAOClass() {
+		// TODO Auto-generated constructor stub
+	}
 	@Autowired
 	private Product Product;
 	
@@ -27,42 +32,23 @@ public class DAOClass implements IDAOInterface {
 	}
 
 	@Override
-	public boolean create(Product product) {
-		try {
-			sessionFactory.getCurrentSession().save(product);
-		}
-		catch (Exception e)
-		{
-			e.printStackTrace();
-			return false;
-		}
-		return true;
+	public void create(Product product) {
+		sessionFactory.getCurrentSession().save(product);
+
 	}
 
 	@Override
-	public boolean update(Product product) {
-		try {
+	public void update(Product product) {
+		
 			sessionFactory.getCurrentSession().update(product);
-		}
-		catch (Exception e)
-		{
-			e.printStackTrace();
-			return false;
-		}
-		return true;
+		
 	}
 
 	@Override
-	public boolean delete(String productId) {
-		try {
+	public void delete(String productId) {
+		
 			sessionFactory.getCurrentSession().delete(retrieve(productId));
-		}
-		catch (Exception e)
-		{
-			e.printStackTrace();
-			return false;
-		}
-		return true;
+
 	}
 
 	@Override
